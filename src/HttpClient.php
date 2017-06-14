@@ -177,6 +177,29 @@ class HttpClient
     }
 
     /**
+     * Get the response header value.
+     *
+     * @param  string  $name
+     * @return mixed
+     */
+    public function getHeader($name)
+    {
+        if ($this->response) {
+            return $this->response->getHeaderLine($name);
+        }
+    }
+
+    /**
+     * Get all response headers values.
+     *
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->response ? $this->response->getHeaders() : [];
+    }
+
+    /**
      * Get response body.
      *
      * @return \GuzzleHttp\Psr7\Stream|null
