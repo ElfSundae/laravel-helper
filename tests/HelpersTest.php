@@ -2,8 +2,6 @@
 
 namespace ElfSundae\Laravel\Helper\Test;
 
-use PHPUnit\Framework\TestCase;
-
 class HelpersTest extends TestCase
 {
     public function test_urlsafe_base64_encode()
