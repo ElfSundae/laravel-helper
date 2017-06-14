@@ -264,6 +264,8 @@ class HttpClient
      */
     public function request($url, $method = 'GET', $options = [])
     {
+        $options = array_merge_recursive($this->options, $options);
+
         try {
             $this->response = $this->client->request($method, $url, $options);
         } catch (Exception $e) {
