@@ -34,6 +34,13 @@ class HttpClient
     ];
 
     /**
+     * Indicates catching Guzzle exceptions.
+     *
+     * @var bool
+     */
+    protected $withExceptions = false;
+
+    /**
      * Create a http client instance.
      *
      * @param  array|string  $config  base_uri or any request options
@@ -57,6 +64,17 @@ class HttpClient
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * Trun on/off Guzzle exceptions.
+     *
+     * @param  bool  $throws
+     * @return $this
+     */
+    public function withExceptions($throws)
+    {
+        $this->withExceptions = !!$throws;
     }
 
     /**
@@ -249,6 +267,9 @@ class HttpClient
         try {
             $this->response = $this->client->request($method, $url, $options);
         } catch (Exception $e) {
+            if ($this->withExceptions) {
+                throw $e;
+            }
         }
 
         return $this;
