@@ -64,7 +64,7 @@ class HttpClient
      * @param  array  $args
      * @return mixed
      */
-    public function __callStatic($method, $args)
+    public static function __callStatic($method, $args)
     {
         return call_user_func_array([static::$sharedClient, $method], $args);
     }
