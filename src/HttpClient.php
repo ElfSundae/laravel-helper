@@ -5,6 +5,7 @@ namespace ElfSundae\Laravel\Helper;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class HttpClient
 {
@@ -23,18 +24,29 @@ class HttpClient
     protected $response;
 
     /**
+     * The request options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'connect_timeout' => 5,
+        'timeout' => 25,
+    ];
+
+    /**
      * Create a http client instance.
      *
-     * @param  array  $config
+     * @param  array|string  $config  base_uri or any request options
      */
-    public function __construct($config = [])
+    public function __construct($config = null)
     {
-        $config = array_merge([
-            'connect_timeout' => 5,
-            'timeout' => 25,
-        ], $config);
+        if (is_string($config)) {
+            $this->mergeOptions(['base_uri' => $config]);
+        } else if (is_array($config)) {
+            $this->mergeOptions($config);
+        }
 
-        $this->client = new Client($config);
+        $this->client = new Client($this->options);
     }
 
     /**
@@ -48,6 +60,101 @@ class HttpClient
     }
 
     /**
+     * Get the request options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Merge request options.
+     *
+     * @param  array  $options
+     * @return $this
+     */
+    public function mergeOptions(array ...$options)
+    {
+        $this->options = array_merge_recursive($this->options, ...$options);
+
+        return $this;
+    }
+
+    /**
+     * Set a request option using "dot" notation.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function option($key, $value)
+    {
+        if ($key) {
+            Arr::set($this->options, $key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the request header.
+     *
+     * @param  string  $name
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function header($name, $value)
+    {
+        return $this->option('headers.'.$name, $value);
+    }
+
+    /**
+     * Set the request content type.
+     *
+     * @param  string  $type
+     * @return $this
+     */
+    public function contentType($type)
+    {
+        return $this->header('Content-Type', $type);
+    }
+
+    /**
+     * Set the request accept type.
+     *
+     * @param  string  $type
+     * @return $this
+     */
+    public function accept($type)
+    {
+        return $this->header('Accept', $type);
+    }
+
+    /**
+     * Set the request accept type to JSON.
+     *
+     * @return $this
+     */
+    public function acceptJson()
+    {
+        return $this->accept('application/json');
+    }
+
+    /**
+     * Specify where the body of a response will be saved.
+     * Set the "sink" option.
+     *
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function saveTo($value)
+    {
+        return $this->option('sink', $value);
+    }
+
+    /**
      * Get the Guzzle response instance.
      *
      * @return \GuzzleHttp\Psr7\Response|null
@@ -55,6 +162,18 @@ class HttpClient
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * Get the status code of response.
+     *
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        if ($this->response) {
+            return $this->response->getStatusCode();
+        }
     }
 
     /**
@@ -152,5 +271,17 @@ class HttpClient
     public function fetchJson($url, $method = 'GET', $options = [], $assoc = true)
     {
         return $this->requestJson($url, $method, $options)->getJson($assoc);
+    }
+
+    /**
+     * Any unhandled methods will be sent to $this->option() to set request option.
+     *
+     * @param  string  $name
+     * @param  array  $args
+     * @return $this
+     */
+    public function __call($name, $args)
+    {
+        return $this->option(Str::snake($name), $args[0]);
     }
 }
