@@ -2,7 +2,7 @@
     "name": "elfsundae/laravel-helper",
     "type": "library",
     "description": "Laravel Helper",
-    "keywords": ["laravel-helper"],
+    "keywords": ["laravel", "helper"],
     "homepage": "https://github.com/ElfSundae/laravel-helper",
     "license": "MIT",
     "authors": [
