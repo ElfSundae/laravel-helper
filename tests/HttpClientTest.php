@@ -2,8 +2,8 @@
 
 namespace ElfSundae\Laravel\Helper\Test;
 
-use ElfSundae\Laravel\Helper\HttpClient;
 use Mockery;
+use ElfSundae\Laravel\Helper\HttpClient;
 
 class HttpClientTest extends TestCase
 {

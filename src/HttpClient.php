@@ -49,7 +49,7 @@ class HttpClient
     {
         if (is_string($config)) {
             $this->mergeOptions(['base_uri' => $config]);
-        } else if (is_array($config)) {
+        } elseif (is_array($config)) {
             $this->mergeOptions($config);
         }
 
@@ -74,7 +74,7 @@ class HttpClient
      */
     public function withExceptions($throws)
     {
-        $this->withExceptions = !!$throws;
+        $this->withExceptions = (bool) $throws;
     }
 
     /**
