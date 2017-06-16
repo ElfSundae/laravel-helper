@@ -66,6 +66,22 @@ if (! function_exists('string_value')) {
     }
 }
 
+if (! function_exists('in_arrayi')) {
+    /**
+     * Case-insensitive `in_array`.
+     *
+     * @see https://stackoverflow.com/a/2166524/521946
+     * @see http://uk.php.net/manual/en/function.in-array.php#89256
+     *
+     * @param  string  $needle
+     * @param  array  $haystack
+     * @return bool
+     */
+    function in_arrayi($needle, $haystack) {
+        return in_array(strtolower($needle), array_map('strtolower', $haystack));
+    }
+}
+
 if (! function_exists('request')) {
     /**
      * Get an instance of the current request or an input item from the request.
