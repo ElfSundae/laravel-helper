@@ -77,7 +77,8 @@ if (! function_exists('in_arrayi')) {
      * @param  array  $haystack
      * @return bool
      */
-    function in_arrayi($needle, $haystack) {
+    function in_arrayi($needle, $haystack)
+    {
         return in_array(strtolower($needle), array_map('strtolower', $haystack));
     }
 }
