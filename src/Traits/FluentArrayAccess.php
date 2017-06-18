@@ -2,6 +2,11 @@
 
 namespace ElfSundae\Laravel\Helper\Traits;
 
+/**
+ * Fix Fluent ArrayAccess implementation.
+ *
+ * @see https://github.com/laravel/framework/pull/16485
+ */
 trait FluentArrayAccess
 {
     /**
