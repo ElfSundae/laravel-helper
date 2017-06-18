@@ -2,9 +2,10 @@
 
 All notable changes to `laravel-helper` will be documented in this file.
 
-## 1.0.3 - 2017/06/
+## 1.0.3 - 2017/06/19
 
 - Added `asset_from()`
+- Added `EloquentAttributesVisibility` trait
 
 ## 1.0.2 - 2017/06/17
 
