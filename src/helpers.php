@@ -116,3 +116,18 @@ if (! function_exists('active')) {
         return call_user_func_array([app('request'), 'is'], func_get_args()) ? 'active' : '';
     }
 }
+
+if (! function_exists('asset_from')) {
+    /**
+     * Generate the URL to an asset from a custom root domain such as CDN, etc.
+     *
+     * @param  string  $root
+     * @param  string  $path
+     * @param  bool|null  $secure
+     * @return string
+     */
+    function asset_from($root, $path = '', $secure = null)
+    {
+        return app('url')->assetFrom($root, $path, $secure);
+    }
+}
