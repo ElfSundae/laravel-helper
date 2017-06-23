@@ -8,6 +8,9 @@ namespace ElfSundae\Laravel\Helper\Traits;
 trait EloquentAttributesVisibility
 {
     /**
+     * Set the hidden attributes for the model.
+     *
+     * @param  array  $hidden
      * @return $this
      */
     abstract public function setHidden(array $hidden);
