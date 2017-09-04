@@ -17,6 +17,18 @@ You can install this package via the [Composer](https://getcomposer.org) manager
 $ composer require elfsundae/laravel-helper
 ```
 
+## Available Global Functions
+
+|                     Function                    |                                  Description                                  |
+|-------------------------------------------------|-------------------------------------------------------------------------------|
+| `urlsafe_base64_encode($data)`                  | URL-safe `base64_encode`                                                      |
+| `urlsafe_base64_decode($data, $strict = false)` | URL-safe `base64_decode`                                                      |
+| `mb_trim($string)`                              | `trim` with mbstring support                                                  |
+| `string_value($value, $jsonOptions = 0)`        | Converts any type to a string                                                 |
+| `in_arrayi($needle, $haystack)`                 | Case-insensitive `in_array`                                                   |
+| `active()`                                      | Returns string 'active' if the current request URI matches the given patterns |
+| `asset_from($root, $path = '', $secure = null)` | Generate the URL to an asset from a custom root domain such as CDN, etc       |
+
 ## Testing
 
 ```sh
