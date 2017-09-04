@@ -1,4 +1,4 @@
-# laravel-helper
+# Laravel Helper
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/elfsundae/laravel-helper.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-helper)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
