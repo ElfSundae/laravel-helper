@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Remove `FluentArrayAccess` trait as Laravel 5.5 [has fixed this](https://github.com/laravel/framework/pull/18403/commits/a604a6f1e4debc1eaee01d61e7e55b4f224b8f1f).
+- Remove `request()` as Laravel already added.
 
 ## 1.2.0 (2017-06-24)
 
