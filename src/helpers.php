@@ -52,17 +52,21 @@ if (! function_exists('string_value')) {
      */
     function string_value($value, $jsonOptions = 0)
     {
-        if (is_object($value)) {
-            if (method_exists($value, '__toString')) {
-                return (string) $value;
-            }
-
-            if (method_exists($value, 'toArray')) {
-                $value = $value->toArray();
-            }
+        if (is_string($value)) {
+            return $value;
         }
 
-        return is_string($value) ? $value : json_encode($value, $jsonOptions | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (method_exists($value, '__toString')) {
+            return (string) $value;
+        }
+
+        if (method_exists($value, 'toArray')) {
+            $value = $value->toArray();
+        }
+
+        $jsonOptions |= JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+        return json_encode($value, $jsonOptions);
     }
 }
 
