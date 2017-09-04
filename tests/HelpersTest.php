@@ -31,6 +31,13 @@ class HelpersTest extends TestCase
         $this->assertSame('{"foo":"bar"}', string_value(new Bar));
         $this->assertSame('1111', string_value(1111));
         $this->assertSame('true', string_value(true));
+        $this->assertSame('{"foo bar":123}', string_value(['foo bar' => 123]));
+    }
+
+    public function test_in_arrayi()
+    {
+        $this->assertTrue(in_arrayi('Foo', ['foo']));
+        $this->assertTrue(in_arrayi('BAR', ['foo' => 'bar']));
     }
 }
 
