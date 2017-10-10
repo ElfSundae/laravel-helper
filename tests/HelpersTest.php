@@ -6,17 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class HelpersTest extends TestCase
 {
-    public function test_urlsafe_base64_encode()
-    {
-        $this->assertSame('TGFyYXZlbA', urlsafe_base64_encode('Laravel'));
-    }
-
-    public function test_urlsafe_base64_decode()
-    {
-        $this->assertSame('Laravel', urlsafe_base64_decode('TGFyYXZlbA'));
-        $this->assertSame('Laravel', urlsafe_base64_decode(base64_encode('Laravel')));
-    }
-
     public function test_mb_trim()
     {
         $this->assertSame('foo', mb_trim(' foo '));
